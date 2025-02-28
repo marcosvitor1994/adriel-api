@@ -1,7 +1,7 @@
 {
-  "name": "secom-api",
+  "name": "adriel-api",
   "version": "1.0.0",
-  "description": "Api criado para a Secretária de Comunicação da Presidência da República",
+  "description": "Api criada para auxiliar nas vendas de produtos",
   "main": "server.js",
   "engines": {
     "node": "18.x"

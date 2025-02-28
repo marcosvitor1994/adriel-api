@@ -1,40 +1,20 @@
-const { Router, json } = require("express");
-const authMidd = require("../middlewares/auth.js");
+const { Router } = require("express");
 
-const { AdminModel } = require("../models/users.js");
-
-const LoginController = require("../controllers/loginController")
-const UserController = require("../controllers/userController");
-const userController = require("../controllers/userController");
+const pedidoController = require("../controllers/pedidoController");
 
 const routes = new Router();
 
-// Login
-routes.post("/login", LoginController.login);
-
-// user
-routes.get("/list", userController.list)
-routes.post("/user", userController.create);
-routes.get("/user/:id", authMidd(["Admin"]), userController.listOne);
-routes.put("/user/:id", authMidd(["Admin"]), userController.update);
-routes.delete("/user/:id", authMidd(["Admin"]), userController.delete);
-
-
-// lista usuários
-routes.get("/users", (req, res) => {
-    const { nome, sexo, email, _role } = req.query;
-    UserModel.find(JSON.parse(JSON.stringify({ nome, sexo, email, _role })))
-      .select("-senha")
-      .then((users) => {
-        res.json(users);
-      });
-  });
-
+// Rotas de pedidos
+routes.get("/pedidos", pedidoController.list);
+routes.post("/pedido", pedidoController.create);
+routes.get("/pedido/:id", pedidoController.listOne);
+routes.put("/pedido/:id", pedidoController.update);
+routes.delete("/pedido/:id", pedidoController.delete);
 
 routes.get("/", (req, res, next) => {
   res.status(200).json({
     status: "Sucess",
-    msg: "Secom tá ON!",
+    msg: "Adriel tá ON!",
   });
 });
 
