@@ -61,24 +61,16 @@ const PedidoSchema = new mongoose.Schema(
       type: Number,
       required: false, // Pode ser opcional dependendo do produto
     },
+    status: {
+      type: String,
+      required: [true, "O status do pedido deve ser preenchido"]
+    }
   },
   {
     timestamps: true,
-    discriminatorKey: "status",
   }
 );
 
 const PedidoModel = mongoose.model("Pedido", PedidoSchema);
-
-// Criando discriminadores para diferentes status de pedidos
-module.exports.PedidoAguardandoModel = PedidoModel.discriminator(
-  "Aguardando",
-  new mongoose.Schema({})
-);
-
-module.exports.PedidoFinalizadoModel = PedidoModel.discriminator(
-  "Finalizado",
-  new mongoose.Schema({})
-);
 
 module.exports.PedidoModel = PedidoModel;
